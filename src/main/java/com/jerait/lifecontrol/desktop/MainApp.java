@@ -8,20 +8,31 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
+/**
+ * Main application class.
+ */
 public class MainApp extends Application {
 
+    /**
+     * Application entry point, initialize environment.
+     * @param stage
+     * @throws Exception
+     */
     @Override
-    public void start(Stage stage) throws Exception {
+    public final void start(final Stage stage) throws Exception {
+        stage.setTitle("LifeControl v0.0.1");
+
         if (!Database.exists()) {
             Database.initDatabase();
         }
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-        
+
+        Parent root = FXMLLoader.load(
+                getClass().getResource("/view/Main.fxml")
+        );
+
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
+        scene.getStylesheets().add("/styles/Main.css");
+
         stage.setScene(scene);
         stage.show();
     }
