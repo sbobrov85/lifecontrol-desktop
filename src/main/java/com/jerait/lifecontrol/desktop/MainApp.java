@@ -1,5 +1,6 @@
 package com.jerait.lifecontrol.desktop;
 
+import com.jerait.lifecontrol.desktop.utils.Database;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,9 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        if (!Database.exists()) {
+            Database.initDatabase();
+        }
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
         
         Scene scene = new Scene(root);

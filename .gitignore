@@ -4,3 +4,4 @@ nbbuild/
 dist/
 nbdist/
 /target/
+lifecontrol.db
