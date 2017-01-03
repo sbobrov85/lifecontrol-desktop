@@ -7,7 +7,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
-import com.jerait.lifecontrol.desktop.table.Account;
 import java.io.File;
 
 /**
@@ -25,6 +24,26 @@ public final class Database {
     private static ConnectionSource databaseConnection;
 
     /**
+     * Contain base chunks for tables path.
+     */
+    private static String[] tablesLocationBaseChunks = {
+        "src",
+        "main",
+        "java"
+    };
+
+    /**
+     * Contain chunks for tables path.
+     */
+    private static String[] tablesLocationChunks = {
+        "com",
+        "jerait",
+        "lifecontrol",
+        "desktop",
+        "table"
+    };
+
+    /**
      * Close constructor for utility class.
      */
     private Database() {
@@ -37,6 +56,24 @@ public final class Database {
     protected static String getDatabaseFullName() {
         String userHome = System.getProperty("user.home");
         return userHome + File.separator + databaseName;
+    }
+
+    /**
+     * Build relative path to tables classes directory.
+     * @return path to tables classes directory.
+     */
+    protected static String getTablesLocation() {
+        return String.join(File.separator, tablesLocationBaseChunks)
+            + File.separator
+            + String.join(File.separator, tablesLocationChunks);
+    }
+
+    /**
+     * Build package name for database tables entities.
+     * @return package name
+     */
+    protected static String getTablesPackageName() {
+        return String.join(".", tablesLocationChunks);
     }
 
     /**
@@ -71,14 +108,30 @@ public final class Database {
 
     /**
      * Create database file and tables structure.
+     * All ORM classes must be stored into table folder!
      * @return true, if database created without errors, false another.
      */
     public static Boolean initDatabase() {
         Boolean result = true;
 
+        String packageName = Database.getTablesPackageName();
+
         try {
             ConnectionSource connection = Database.getDatabaseConnection();
-            TableUtils.createTable(connection, Account.class);
+
+            File tableDir = new File(Database.getTablesLocation());
+            File[] tablesList = tableDir.listFiles();
+
+            for (File table: tablesList) {
+                try {
+                    String classFileName = table.getName().split("\\.")[0];
+                    Class className = Class
+                        .forName(packageName + "." + classFileName);
+                    TableUtils.createTable(connection, className);
+                } catch (Exception e) {
+                    //todo add action.
+                }
+            }
         } catch (Exception e) {
             result = false;
         }
