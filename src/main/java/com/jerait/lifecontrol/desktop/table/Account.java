@@ -21,6 +21,18 @@ public final class Account {
     private String label;
 
     /**
+     * Link to AccountGroup.
+     */
+    @DatabaseField(columnName = "account_group_id")
+    private int $accountGroupId;
+
+    /**
+     * Link to AccountType.
+     */
+    @DatabaseField(columnName = "account_type_id")
+    private int $accountTypeId;
+
+    /**
      * @return the accountId
      */
     public int getAccountId() {
@@ -46,5 +58,33 @@ public final class Account {
      */
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    /**
+     * @return the $accountGroupId
+     */
+    public int get$accountGroupId() {
+        return $accountGroupId;
+    }
+
+    /**
+     * @param $accountGroupId the $accountGroupId to set
+     */
+    public void set$accountGroupId(int $accountGroupId) {
+        this.$accountGroupId = $accountGroupId;
+    }
+
+    /**
+     * @return the $accountTypeId
+     */
+    public int get$accountTypeId() {
+        return $accountTypeId;
+    }
+
+    /**
+     * @param $accountTypeId the $accountTypeId to set
+     */
+    public void set$accountTypeId(int $accountTypeId) {
+        this.$accountTypeId = $accountTypeId;
     }
 }
