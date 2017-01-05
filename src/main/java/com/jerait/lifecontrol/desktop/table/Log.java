@@ -12,7 +12,7 @@ public class Log {
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "log_id", id = true)
+    @DatabaseField(columnName = "log_id", generatedId = true)
     private int logId;
 
     /**

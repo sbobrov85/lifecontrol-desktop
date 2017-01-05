@@ -22,7 +22,7 @@ public class Payment {
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "payment_id", id = true)
+    @DatabaseField(columnName = "payment_id", generatedId = true)
     private int paymentId;
 
     /**

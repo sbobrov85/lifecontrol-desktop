@@ -11,7 +11,7 @@ public class UserPrivilege {
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "user_privilege_id", id = true)
+    @DatabaseField(columnName = "user_privilege_id", generatedId = true)
     private int userPrivilegeId;
 
     /**

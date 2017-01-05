@@ -11,7 +11,7 @@ public class AccountType {
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "account_type", id = true)
+    @DatabaseField(columnName = "account_type", generatedId = true)
     private int accountType;
 
     /**

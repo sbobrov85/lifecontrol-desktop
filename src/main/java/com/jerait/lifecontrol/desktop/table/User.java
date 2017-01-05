@@ -12,7 +12,7 @@ public class User {
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "user_id", id = true)
+    @DatabaseField(columnName = "user_id", generatedId = true)
     private int userId;
 
     /**

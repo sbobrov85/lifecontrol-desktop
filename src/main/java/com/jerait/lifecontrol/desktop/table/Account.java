@@ -11,7 +11,7 @@ public final class Account {
     /**
      * Primary key.
      */
-    @DatabaseField(id = true, columnName = "account_id")
+    @DatabaseField(generatedId = true, columnName = "account_id")
     private int accountId;
 
     /**

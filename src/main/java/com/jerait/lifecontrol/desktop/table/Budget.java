@@ -11,7 +11,7 @@ public class Budget {
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "budget_id", id = true)
+    @DatabaseField(columnName = "budget_id", generatedId = true)
     private int budgetId;
 
     /**

@@ -11,7 +11,7 @@ public class UserRole {
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "user_role_id", id = true)
+    @DatabaseField(columnName = "user_role_id", generatedId = true)
     private int userRoleId;
 
     /**
