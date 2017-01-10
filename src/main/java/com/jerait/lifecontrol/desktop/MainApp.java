@@ -1,10 +1,9 @@
 package com.jerait.lifecontrol.desktop;
 
 import com.jerait.lifecontrol.desktop.utils.Database;
+import com.jerait.lifecontrol.desktop.utils.GUI;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -14,9 +13,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     /**
-     * Application entry point, initialize environment.
-     * @param stage
-     * @throws Exception
+     * {@inheritDoc}
      */
     @Override
     public final void start(final Stage stage) throws Exception {
@@ -26,15 +23,14 @@ public class MainApp extends Application {
             Database.initDatabase();
         }
 
-        Parent root = FXMLLoader.load(
-                getClass().getResource("/view/Main.fxml")
-        );
-
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Main.css");
+        Scene scene = GUI.getScene("Main");
 
         stage.setScene(scene);
         stage.show();
+
+        if (!GUI.showDialog("Auth", stage)) {
+            stage.close();
+        }
     }
 
     /**
@@ -45,7 +41,7 @@ public class MainApp extends Application {
      *
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch(args);
     }
 

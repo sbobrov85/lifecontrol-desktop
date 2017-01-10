@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="188.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jerait.lifecontrol.desktop.controller.AuthController">
+   <children>
+      <ChoiceBox fx:id="usersList" layoutX="9.0" layoutY="39.0" prefHeight="26.0" prefWidth="283.0" />
+      <Label layoutX="9.0" layoutY="14.0" text="\%Select user" />
+      <Button layoutX="9.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleEnterButton" text="\%Enter" />
+      <PasswordField layoutX="9.0" layoutY="106.0" prefHeight="26.0" prefWidth="283.0" />
+      <Label layoutX="9.0" layoutY="76.0" text="\%Enter password" />
+      <Button layoutX="86.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleCancelButton" text="\%Cancel" />
+   </children>
+</AnchorPane>
