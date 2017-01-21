@@ -1,5 +1,6 @@
 package com.jerait.lifecontrol.desktop;
 
+import com.jerait.lifecontrol.desktop.model.UserModel;
 import com.jerait.lifecontrol.desktop.utils.Database;
 import com.jerait.lifecontrol.desktop.utils.GUI;
 import javafx.application.Application;
@@ -28,8 +29,10 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-        if (!GUI.showDialog("Auth", stage)) {
-            stage.close();
+        if (UserModel.getInstance().getDefaultUserId() == 0) {
+            if (!GUI.showDialog("Auth", stage)) {
+                stage.close();
+            }
         }
     }
 

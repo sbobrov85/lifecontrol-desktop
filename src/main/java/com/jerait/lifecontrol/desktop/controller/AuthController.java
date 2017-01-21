@@ -50,8 +50,14 @@ public class AuthController implements Initializable {
      */
     @FXML
     private void handleEnterButton() {
-        okClicked = true;
-        dialogStage.close();
+        Object username = usersList.getSelectionModel().getSelectedItem();
+
+        if (UserModel.getInstance().loadUserByUsername((String) username)) {
+            okClicked = true;
+            dialogStage.close();
+        } else {
+            
+        }
     }
 
     /**

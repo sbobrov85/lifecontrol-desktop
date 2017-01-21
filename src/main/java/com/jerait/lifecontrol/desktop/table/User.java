@@ -22,6 +22,11 @@ public class User {
     private String username;
 
     /**
+     * Const for username database column name.
+     */
+    public static final String USERNAME_COLUMN_NAME = "username";
+
+    /**
      * Password hash field.
      */
     @DatabaseField
@@ -50,6 +55,11 @@ public class User {
      */
     @DatabaseField(columnName = "is_default")
     private Boolean isDefault;
+
+    /**
+     * Const for is_default column name.
+     */
+    public static final String IS_DEFAULT_COLUMN_NAME = "is_default";
 
     /**
      * @return the userId
