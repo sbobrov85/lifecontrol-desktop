@@ -3,8 +3,8 @@ package com.jerait.lifecontrol.desktop;
 import com.jerait.lifecontrol.desktop.model.UserModel;
 import com.jerait.lifecontrol.desktop.utils.Database;
 import com.jerait.lifecontrol.desktop.utils.GUI;
+import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -13,16 +13,19 @@ import javafx.stage.Stage;
  */
 public class MainApp extends Application {
 
+    @Override
+    public final void init() throws Exception {
+      if (!Database.exists()) {
+          Database.initDatabase();
+      }
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public final void start(final Stage stage) throws Exception {
         stage.setTitle("LifeControl v0.0.1");
-
-        if (!Database.exists()) {
-            Database.initDatabase();
-        }
 
         Scene scene = GUI.getScene("Main");
 
@@ -45,7 +48,11 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(final String[] args) {
-        launch(args);
+        LauncherImpl.launchApplication(
+            MainApp.class,
+            MainPreloader.class,
+            args
+        );
     }
 
 }
