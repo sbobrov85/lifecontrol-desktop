@@ -210,6 +210,12 @@ public final class UserModel {
     public Boolean checkPassword(String password) {
         Boolean checkResult = false;
 
+        if (user instanceof User) {
+          //todo add md5 prepare from settings solt.
+          String passwordHash = password;
+          checkResult = passwordHash.equals(user.getPassword());
+        }
+
         return checkResult;
     }
 }

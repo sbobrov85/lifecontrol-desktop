@@ -34,7 +34,7 @@ public class User {
     /**
      * Password hash field.
      */
-    @DatabaseField
+    @DatabaseField(canBeNull = false)
     private String password;
 
     /**

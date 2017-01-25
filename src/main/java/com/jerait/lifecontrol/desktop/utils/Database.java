@@ -280,6 +280,7 @@ public final class Database {
     private static int fillDatabaseDefaultUser() throws SQLException {
         User user = new User();
         user.setUsername("Default user");
+        user.setPassword("");
         user.setIsDefault(true);
         user.setInsertDate(new Date());
         user.setIsActive(true);
