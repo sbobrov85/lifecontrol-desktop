@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 /**
@@ -26,6 +28,12 @@ public class AuthController implements Initializable {
     private ChoiceBox usersList;
 
     /**
+     * User password field.
+     */
+    @FXML
+    private PasswordField password;
+
+    /**
      * Contained dialog Stage loaded from fxml view.
      */
     private Stage dialogStage;
@@ -34,6 +42,12 @@ public class AuthController implements Initializable {
      * Contained dialog result after close.
      */
     private boolean okClicked = false;
+
+    /**
+     * Contained messages label.
+     */
+    @FXML
+    private Label messagesLabel;
 
     /**
      * {@inheritDoc}
@@ -53,10 +67,14 @@ public class AuthController implements Initializable {
         Object username = usersList.getSelectionModel().getSelectedItem();
 
         if (UserModel.getInstance().loadUserByUsername((String) username)) {
-            okClicked = true;
-            dialogStage.close();
+            if (UserModel.getInstance().checkPassword(password.getText())) {
+                okClicked = true;
+                dialogStage.close();
+            } else {
+                messagesLabel.setText("%Wrong user password");
+            }
         } else {
-            
+            messagesLabel.setText("%User loading error");
         }
     }
 

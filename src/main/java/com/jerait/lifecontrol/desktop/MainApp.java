@@ -32,10 +32,14 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-        if (UserModel.getInstance().getDefaultUserId() == 0) {
+        int userId = UserModel.getInstance().getDefaultUserId();
+
+        if (userId == 0) {
             if (!GUI.showDialog("Auth", stage)) {
                 stage.close();
             }
+        } else {
+            UserModel.getInstance().loadUser(userId);
         }
     }
 

@@ -16,6 +16,11 @@ public class User {
     private int userId;
 
     /**
+     * Const for user_id database column name.
+     */
+    public static final String USER_ID_COLUMN_NAME = "user_id";
+
+    /**
      * Username field.
      */
     @DatabaseField
