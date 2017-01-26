@@ -39,7 +39,10 @@ public class MainApp extends Application {
                 stage.close();
             }
         } else {
-            UserModel.getInstance().loadUser(userId);
+            if (UserModel.getInstance().loadUser(userId)) {
+                scene = GUI.getScene("MainTabs");
+                stage.setScene(scene);
+            }
         }
     }
 
