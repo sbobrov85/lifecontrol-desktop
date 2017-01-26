@@ -39,7 +39,12 @@ public final class GUI {
      * @throws IOException on load errors.
      */
     public static Scene getScene(final String viewName) throws IOException {
-        Parent root = FXMLLoader.load(getResourceUrl(viewName));
+        Parent root = FXMLLoader.load(
+            getResourceUrl(viewName),
+            ResourceBundle.getBundle(
+                "language." + viewName
+            )
+        );
 
         Scene scene = new Scene(root);
 //        scene.getStylesheets().add("/styles/Main.css");

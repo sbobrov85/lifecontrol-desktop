@@ -210,12 +210,22 @@ public final class UserModel {
     public Boolean checkPassword(String password) {
         Boolean checkResult = false;
 
-        if (user instanceof User) {
+        if (isUserLoaded()) {
           //todo add md5 prepare from settings solt.
           String passwordHash = password;
           checkResult = passwordHash.equals(user.getPassword());
         }
 
         return checkResult;
+    }
+
+    /**
+     * Check if user instance is loaded into this object.
+     * @return true if user loaded, false another.
+     * @todo check best.
+     */
+    public Boolean isUserLoaded()
+    {
+        return user instanceof User;
     }
 }
