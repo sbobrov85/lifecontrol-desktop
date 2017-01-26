@@ -7,6 +7,7 @@ package com.jerait.lifecontrol.desktop.controller;
 
 import com.jerait.lifecontrol.desktop.model.UserModel;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -21,6 +22,18 @@ import javafx.stage.Stage;
  */
 public class AuthController implements Initializable {
 
+    /**
+     * Locale bundle resource.
+     */
+    @FXML
+    private ResourceBundle resources;
+
+    /**
+     * Users list label.
+     */
+    @FXML
+    private Label usersListLabel;
+    
     /**
      * user list select box.
      */
@@ -54,6 +67,7 @@ public class AuthController implements Initializable {
      */
     @Override
     public final void initialize(URL url, ResourceBundle rb) {
+        resources = rb;
         String[] users = UserModel.getInstance().getUsernameList();
         usersList.setItems(FXCollections.observableArrayList(users));
         usersList.getSelectionModel().selectFirst();
@@ -71,10 +85,14 @@ public class AuthController implements Initializable {
                 okClicked = true;
                 dialogStage.close();
             } else {
-                messagesLabel.setText("%Wrong user password");
+                messagesLabel.setText(
+                    resources.getString("Wrong user password")
+                );
             }
         } else {
-            messagesLabel.setText("%User loading error");
+            messagesLabel.setText(
+                resources.getString("User loading error")
+            );
         }
     }
 

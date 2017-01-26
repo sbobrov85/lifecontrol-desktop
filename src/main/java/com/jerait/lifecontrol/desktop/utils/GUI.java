@@ -2,6 +2,8 @@ package com.jerait.lifecontrol.desktop.utils;
 
 import com.jerait.lifecontrol.desktop.controller.AuthController;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -56,7 +58,12 @@ public final class GUI {
         final String viewName,
         final Stage primaryStage
     ) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getResourceUrl(viewName));
+        FXMLLoader loader = new FXMLLoader(
+            getResourceUrl(viewName),
+            ResourceBundle.getBundle(
+                "language." + viewName
+            )
+        );
         AnchorPane page = (AnchorPane) loader.load();
 
         Stage dialogStage = new Stage();
