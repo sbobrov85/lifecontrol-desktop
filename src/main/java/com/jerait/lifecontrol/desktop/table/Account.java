@@ -21,15 +21,27 @@ public final class Account {
     private String label;
 
     /**
+     * Contained account group id column name constant.
+     */
+    public static final
+        String ACCOUNT_GROUP_ID_COLUMN_NAME = "account_group_id";
+
+    /**
      * Link to AccountGroup.
      */
-    @DatabaseField(columnName = "account_group_id")
+    @DatabaseField(columnName = ACCOUNT_GROUP_ID_COLUMN_NAME)
     private int $accountGroupId;
+
+    /**
+     * Contained account type id column name constant.
+     */
+    public static final
+        String ACCOUNT_TYPE_ID_COLUMN_NAME = "account_type_id";
 
     /**
      * Link to AccountType.
      */
-    @DatabaseField(columnName = "account_type_id")
+    @DatabaseField(columnName = ACCOUNT_TYPE_ID_COLUMN_NAME)
     private int $accountTypeId;
 
     /**

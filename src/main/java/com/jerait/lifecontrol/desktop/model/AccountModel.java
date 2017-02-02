@@ -2,8 +2,10 @@ package com.jerait.lifecontrol.desktop.model;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.jerait.lifecontrol.desktop.table.Account;
 import com.jerait.lifecontrol.desktop.table.AccountGroup;
+import com.jerait.lifecontrol.desktop.table.AccountType;
 import com.jerait.lifecontrol.desktop.utils.Database;
 import java.sql.SQLException;
 import java.util.List;
@@ -50,19 +52,52 @@ public class AccountModel {
 
     /**
      * Get all accounts list.
+     * @param accountGroupId account group id.
+     * @param accountTypeId account type id.
      * @return accounts list or null.
      */
-    public List<Account> getAccountsAll() {
+    public List<Account> getAccounts(
+        final int accountGroupId,
+        final int accountTypeId
+    ) {
         List<Account> accounts = null;
 
         try {
-            accounts = dao.queryForAll();
+            QueryBuilder queryBuilder = dao.queryBuilder();
+            queryBuilder.where().eq(
+                Account.ACCOUNT_GROUP_ID_COLUMN_NAME,
+                accountGroupId
+            ).and().eq(
+                Account.ACCOUNT_TYPE_ID_COLUMN_NAME,
+                accountTypeId
+            );
+            accounts = queryBuilder.query();
         } catch (SQLException ex) {
             Logger.getLogger(AccountModel.class.getName())
                 .log(Level.SEVERE, null, ex);
         }
 
         return accounts;
+    }
+
+    /**
+     * Get all account types list.
+     * @return account types list or null.
+     */
+    public List<AccountType> getAccountTypes() {
+        List<AccountType> accountTypes = null;
+        try {
+            Dao<AccountType, ?> accountTypeDao = DaoManager.createDao(
+                    Database.getDatabaseConnection(),
+                    AccountType.class
+            );
+            accountTypes = accountTypeDao.queryForAll();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountModel.class.getName())
+                .log(Level.SEVERE, null, ex);
+        }
+
+        return accountTypes;
     }
 
     /**
