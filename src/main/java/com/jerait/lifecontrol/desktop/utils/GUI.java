@@ -33,18 +33,30 @@ public final class GUI {
     }
 
     /**
-     * Prepare scene from fxml resource.
+     * Get layout from fxml resource with language.
      * @param viewName fxml name withount extensions from views folder.
-     * @return Scene object.
+     * @return Parent object
      * @throws IOException on load errors.
      */
-    public static Scene getScene(final String viewName) throws IOException {
+    public static Parent getLayout(final String viewName) throws IOException {
         Parent root = FXMLLoader.load(
             getResourceUrl(viewName),
             ResourceBundle.getBundle(
                 "language." + viewName
             )
         );
+
+        return root;
+    }
+
+    /**
+     * Prepare scene from fxml resource.
+     * @param viewName fxml name withount extensions from views folder.
+     * @return Scene object.
+     * @throws IOException on load errors.
+     */
+    public static Scene getScene(final String viewName) throws IOException {
+        Parent root = getLayout(viewName);
 
         Scene scene = new Scene(root);
 //        scene.getStylesheets().add("/styles/Main.css");

@@ -8,22 +8,22 @@
    <children>
       <TabPane fx:id="mainTabs" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="%Accounts">
+          <Tab fx:id="accountsTab" text="%Accounts">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="474.0" />
             </content>
           </Tab>
-          <Tab text="%Budget">
+          <Tab fx:id="budgetsTab" text="%Budget">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-            <Tab text="%Reports">
+            <Tab fx:id="reportsTab" text="%Reports">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="%Settings">
+            <Tab fx:id="settingsTab" text="%Settings">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

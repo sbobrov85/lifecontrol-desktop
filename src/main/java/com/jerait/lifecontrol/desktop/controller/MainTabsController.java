@@ -4,13 +4,18 @@ import com.jerait.lifecontrol.desktop.model.AccountModel;
 import com.jerait.lifecontrol.desktop.table.Account;
 import com.jerait.lifecontrol.desktop.table.AccountGroup;
 import com.jerait.lifecontrol.desktop.table.AccountType;
+import com.jerait.lifecontrol.desktop.utils.GUI;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -37,6 +42,30 @@ public class MainTabsController implements Initializable {
     private TabPane mainTabs;
 
     /**
+     * Accounts tab instance.
+     */
+    @FXML
+    private Tab accountsTab;
+
+    /**
+     * Budgets tab instance.
+     */
+    @FXML
+    private Tab budgetsTab;
+
+    /**
+     * Reports tab instance.
+     */
+    @FXML
+    private Tab reportsTab;
+
+    /**
+     * Settings tab instance.
+     */
+    @FXML
+    private Tab settingsTab;
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -51,7 +80,18 @@ public class MainTabsController implements Initializable {
                     Tab oldValue,
                     Tab newValue
                 ) {
-                    //todo write destroy tabs content
+                    oldValue.setContent(null);
+
+                    switch (newValue.getId()) {
+                        case "accountsTab":
+                            setAccountsTabData();
+                            break;
+                        case "settingsTab":
+                            setSettingsTabData();
+                            break;
+
+                        default:
+                    }
                 }
             }
         );
@@ -137,5 +177,18 @@ public class MainTabsController implements Initializable {
         }
 
         return accountsList;
+    }
+
+    /**
+     * Create user interface for settings tab.
+     */
+    protected final void setSettingsTabData() {
+        try {
+            Parent root = GUI.getLayout("SettingsTab");
+            settingsTab.setContent(root);
+        } catch (IOException ex) {
+            Logger.getLogger(MainTabsController.class.getName())
+                .log(Level.SEVERE, null, ex);
+        }
     }
 }
