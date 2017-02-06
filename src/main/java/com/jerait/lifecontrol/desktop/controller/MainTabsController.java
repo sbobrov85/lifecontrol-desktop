@@ -5,6 +5,7 @@ import com.jerait.lifecontrol.desktop.table.Account;
 import com.jerait.lifecontrol.desktop.table.AccountGroup;
 import com.jerait.lifecontrol.desktop.table.AccountType;
 import com.jerait.lifecontrol.desktop.utils.GUI;
+import com.jerait.lifecontrol.desktop.utils.Tools;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -113,13 +114,10 @@ public class MainTabsController implements Initializable {
             );
 
             for (AccountGroup accountGroup: accountGroups) {
-                String tabLabel = accountGroup.getLabel();
-
-                if (tabLabel.contains("%")) {
-                    tabLabel = resources.getString(
-                        tabLabel.replaceAll("%", "")
-                    );
-                }
+                String tabLabel = Tools.translateString(
+                    accountGroup.getLabel(),
+                    resources
+                );
 
                 Tab accountGroupTab = new Tab(tabLabel);
 

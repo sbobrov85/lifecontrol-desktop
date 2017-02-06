@@ -7,27 +7,27 @@ import com.j256.ormlite.table.DatabaseTable;
  * Manage categories list.
  */
 @DatabaseTable(tableName = "category")
-public class Category {
+public final class Category {
     /**
      * Category type constant for expense.
      */
-    final public int CATEGORY_TYPE_EXPENSE = 0;
+    public static final int CATEGORY_TYPE_EXPENSE = 0;
 
     /**
      * Category type constant for income.
      */
-    final public int CATEGORY_TYPE_INCOME = 1;
+    public static final int CATEGORY_TYPE_INCOME = 1;
 
     /**
      * Primary key.
      */
-    @DatabaseField(columnName = "category_id")
+    @DatabaseField(columnName = "category_id", index = true)
     private int categoryId;
 
     /**
      * Link to parent category_id.
      */
-    @DatabaseField(columnName = "parent_id")
+    @DatabaseField(columnName = "parent_id", index = true)
     private int parentId;
 
     /**
@@ -44,6 +44,22 @@ public class Category {
     private int categoryType;
 
     /**
+     * Contains short comment of category.
+     */
+    @DatabaseField
+    private String comment;
+
+    /**
+     * Protect root categories.
+     */
+    @DatabaseField(
+        columnName = "is_protected",
+        defaultValue = "0",
+        canBeNull = false
+    )
+    private Boolean isProtected;
+
+    /**
      * @return the categoryId
      */
     public int getCategoryId() {
@@ -51,10 +67,10 @@ public class Category {
     }
 
     /**
-     * @param categoryId the categoryId to set
+     * @param newCategoryId the categoryId to set
      */
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryId(final int newCategoryId) {
+        this.categoryId = newCategoryId;
     }
 
     /**
@@ -65,10 +81,10 @@ public class Category {
     }
 
     /**
-     * @param parentId the parentId to set
+     * @param newParentId the parentId to set
      */
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
+    public void setParentId(final int newParentId) {
+        this.parentId = newParentId;
     }
 
     /**
@@ -79,10 +95,10 @@ public class Category {
     }
 
     /**
-     * @param label the label to set
+     * @param newLabel the label to set
      */
-    public void setLabel(String label) {
-        this.label = label;
+    public void setLabel(final String newLabel) {
+        this.label = newLabel;
     }
 
     /**
@@ -93,9 +109,41 @@ public class Category {
     }
 
     /**
-     * @param categoryType the categoryType to set
+     * @param newCategoryType the categoryType to set
      */
-    public void setCategoryType(int categoryType) {
-        this.categoryType = categoryType;
+    public void setCategoryType(final int newCategoryType) {
+        this.categoryType = newCategoryType;
+    }
+
+    /**
+     * Get value of comment field.
+     * @return value of comment field.
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * Set value of comment field.
+     * @param newComment new value of comment field.
+     */
+    public void setComment(final String newComment) {
+        this.comment = newComment;
+    }
+
+    /**
+     * Get value of isProtected field.
+     * @return value of isProtected field.
+     */
+    public Boolean getIsProtected() {
+        return isProtected;
+    }
+
+    /**
+     * Set value of isProtected field.
+     * @param newIsProtected new value of isProtected field.
+     */
+    public void setIsProtected(final Boolean newIsProtected) {
+        this.isProtected = newIsProtected;
     }
 }

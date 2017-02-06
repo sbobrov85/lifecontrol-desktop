@@ -6,6 +6,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.jerait.lifecontrol.desktop.table.AccountGroup;
+import com.jerait.lifecontrol.desktop.table.Category;
 import com.jerait.lifecontrol.desktop.table.Option;
 import com.jerait.lifecontrol.desktop.table.User;
 import com.jerait.lifecontrol.desktop.table.UserPrivilege;
@@ -168,6 +169,7 @@ public final class Database {
             int userId = fillDatabaseDefaultUser();
             linkUserRole(userId, userRoleId);
             fillDefaultOptions();
+            fillDefaultCategories();
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName())
                 .log(Level.SEVERE, null, ex);
@@ -326,5 +328,30 @@ public final class Database {
             Option.class
         );
         optionDao.create(saltOption);
+    }
+
+    /**
+     * Create two root categories: income and expense.
+     * @throws SQLException on dao errors.
+     */
+    private static void fillDefaultCategories() throws SQLException {
+        Dao<Category, ?> dao = DaoManager.createDao(
+            getDatabaseConnection(),
+            Category.class
+        );
+
+        Category category;
+
+        //income
+        category = new Category();
+        category.setLabel("%Income");
+        category.setIsProtected(Boolean.TRUE);
+        dao.create(category);
+
+        //expense
+        category = new Category();
+        category.setLabel("%Expense");
+        category.setIsProtected(Boolean.TRUE);
+        dao.create(category);
     }
 }
