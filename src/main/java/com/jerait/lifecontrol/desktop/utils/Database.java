@@ -6,6 +6,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.jerait.lifecontrol.desktop.table.AccountGroup;
+import com.jerait.lifecontrol.desktop.table.Option;
 import com.jerait.lifecontrol.desktop.table.User;
 import com.jerait.lifecontrol.desktop.table.UserPrivilege;
 import com.jerait.lifecontrol.desktop.table.UserRole;
@@ -166,6 +167,7 @@ public final class Database {
             int userRoleId = fillDatabaseDefaultUserRole();
             int userId = fillDatabaseDefaultUser();
             linkUserRole(userId, userRoleId);
+            fillDefaultOptions();
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName())
                 .log(Level.SEVERE, null, ex);
@@ -308,5 +310,21 @@ public final class Database {
             UserRoleLink.class
         );
         dao.create(link);
+    }
+
+    /**
+     * Create default options.
+     * @throws SQLException on dao errors.
+     */
+    private static void fillDefaultOptions() throws SQLException {
+        // random salt
+        Option saltOption = new Option();
+        saltOption.setOptionId("salt");
+        saltOption.setValue(Tools.saltGenerate());
+        Dao<Option, ?> optionDao = DaoManager.createDao(
+            getDatabaseConnection(),
+            Option.class
+        );
+        optionDao.create(saltOption);
     }
 }
