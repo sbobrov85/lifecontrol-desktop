@@ -346,12 +346,14 @@ public final class Database {
         category = new Category();
         category.setLabel("%Income");
         category.setIsProtected(Boolean.TRUE);
+        category.setCategoryType(Category.CATEGORY_TYPE_INCOME);
         dao.create(category);
 
         //expense
         category = new Category();
         category.setLabel("%Expense");
         category.setIsProtected(Boolean.TRUE);
+        category.setCategoryType(Category.CATEGORY_TYPE_EXPENSE);
         dao.create(category);
     }
 }
