@@ -7,7 +7,6 @@ package com.jerait.lifecontrol.desktop.controller;
 
 import com.jerait.lifecontrol.desktop.model.UserModel;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,12 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class.
  */
-public class AuthController implements Initializable {
+public class AuthController extends DialogController  implements Initializable {
 
     /**
      * Locale bundle resource.
@@ -33,7 +31,7 @@ public class AuthController implements Initializable {
      */
     @FXML
     private Label usersListLabel;
-    
+
     /**
      * user list select box.
      */
@@ -45,16 +43,6 @@ public class AuthController implements Initializable {
      */
     @FXML
     private PasswordField password;
-
-    /**
-     * Contained dialog Stage loaded from fxml view.
-     */
-    private Stage dialogStage;
-
-    /**
-     * Contained dialog result after close.
-     */
-    private boolean okClicked = false;
 
     /**
      * Contained messages label.
@@ -82,8 +70,7 @@ public class AuthController implements Initializable {
 
         if (UserModel.getInstance().loadUserByUsername((String) username)) {
             if (UserModel.getInstance().checkPassword(password.getText())) {
-                okClicked = true;
-                dialogStage.close();
+                closeDialog(true);
             } else {
                 messagesLabel.setText(
                     resources.getString("Wrong user password")
@@ -101,24 +88,6 @@ public class AuthController implements Initializable {
      */
     @FXML
     private void handleCancelButton() {
-        okClicked = false;
-        dialogStage.close();
-    }
-
-    /**
-     * Set dialog Stage into property.
-     * @param dialogStage dialog Stage instance.
-     */
-    public final void setDialogStage(Stage dialogStage) {
-        dialogStage.resizableProperty().set(false);
-        this.dialogStage = dialogStage;
-    }
-
-    /**
-     * Check dialog result.
-     * @return true, if Enter button (Ok) pressed.
-     */
-    public final boolean isOkClicked() {
-        return okClicked;
+        closeDialog(false);
     }
 }
