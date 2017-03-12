@@ -34,15 +34,20 @@ public final class Tools {
      * @return translated or original string.
      */
     public static String translateString(
-        String string,
+        final String string,
         final ResourceBundle resources
     ) {
-        if (string.contains("%")) {
-            string = resources.getString(
-                string.replaceAll("%", "")
-            );
+        String result;
+
+        String resourceKey = string.contains("%") ?
+            string.replaceAll("%", "") : string;
+
+        try {
+            result = resources.getString(resourceKey);
+        } catch (Exception $e) {
+            result = resourceKey;
         }
 
-        return string;
+        return result;
     }
 }
